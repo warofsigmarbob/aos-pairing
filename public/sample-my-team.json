@@ -1,0 +1,157 @@
+{
+  "teamName": "Les Griffons d'Azyr",
+  "players": [
+    {
+      "name": "Aldric Stormhammer",
+      "army": "Stormcast Eternals",
+      "listName": "Shootcast",
+      "battleplanScores": {
+        "Passing Seasons": 5,
+        "Paths of the Fey": 4,
+        "Roiling Roots": 3,
+        "Cyclic Shifts": 5,
+        "Surge of Slaughter": 4,
+        "Linked Ley Lines": 2,
+        "Noxious Nexus": 5,
+        "The Liferoots": 3,
+        "Bountiful Equinox": 4,
+        "Lifecycle": 5,
+        "Creeping Corruption": 3,
+        "Grasp of Thorns": 4
+      }
+    },
+    {
+      "name": "Skritch Gnawfang",
+      "army": "Skaven",
+      "listName": "Verminlord",
+      "battleplanScores": {
+        "Passing Seasons": 3,
+        "Paths of the Fey": 5,
+        "Roiling Roots": 4,
+        "Cyclic Shifts": 2,
+        "Surge of Slaughter": 3,
+        "Linked Ley Lines": 5,
+        "Noxious Nexus": 4,
+        "The Liferoots": 6,
+        "Bountiful Equinox": 3,
+        "Lifecycle": 2,
+        "Creeping Corruption": 5,
+        "Grasp of Thorns": 4
+      }
+    },
+    {
+      "name": "Morathi's Shadow",
+      "army": "Daughters of Khaine",
+      "listName": "Morathi",
+      "battleplanScores": {
+        "Passing Seasons": 6,
+        "Paths of the Fey": 5,
+        "Roiling Roots": 5,
+        "Cyclic Shifts": 4,
+        "Surge of Slaughter": 6,
+        "Linked Ley Lines": 5,
+        "Noxious Nexus": 4,
+        "The Liferoots": 5,
+        "Bountiful Equinox": 6,
+        "Lifecycle": 5,
+        "Creeping Corruption": 4,
+        "Grasp of Thorns": 5
+      }
+    },
+    {
+      "name": "Teclis Windrunner",
+      "army": "Lumineth Realm-lords",
+      "listName": "Sentinels",
+      "battleplanScores": {
+        "Passing Seasons": 4,
+        "Paths of the Fey": 3,
+        "Roiling Roots": 2,
+        "Cyclic Shifts": 3,
+        "Surge of Slaughter": 2,
+        "Linked Ley Lines": 3,
+        "Noxious Nexus": 2,
+        "The Liferoots": 3,
+        "Bountiful Equinox": 2,
+        "Lifecycle": 3,
+        "Creeping Corruption": 2,
+        "Grasp of Thorns": 3
+      }
+    },
+    {
+      "name": "Vladrik Bloodborne",
+      "army": "Soulblight Gravelords",
+      "listName": "Vampire Lords",
+      "battleplanScores": {
+        "Passing Seasons": 4,
+        "Paths of the Fey": 4,
+        "Roiling Roots": 5,
+        "Cyclic Shifts": 4,
+        "Surge of Slaughter": 5,
+        "Linked Ley Lines": 4,
+        "Noxious Nexus": 3,
+        "The Liferoots": 4,
+        "Bountiful Equinox": 5,
+        "Lifecycle": 4,
+        "Creeping Corruption": 3,
+        "Grasp of Thorns": 4
+      }
+    },
+    {
+      "name": "Kroq-Gar the Ancient",
+      "army": "Seraphon",
+      "listName": "Kroak",
+      "battleplanScores": {
+        "Passing Seasons": 5,
+        "Paths of the Fey": 6,
+        "Roiling Roots": 4,
+        "Cyclic Shifts": 5,
+        "Surge of Slaughter": 4,
+        "Linked Ley Lines": 6,
+        "Noxious Nexus": 5,
+        "The Liferoots": 4,
+        "Bountiful Equinox": 5,
+        "Lifecycle": 6,
+        "Creeping Corruption": 4,
+        "Grasp of Thorns": 5
+      }
+    },
+    {
+      "name": "Grimnar Ironforge",
+      "army": "Fyreslayers",
+      "listName": "Hearthguard",
+      "battleplanScores": {
+        "Passing Seasons": 2,
+        "Paths of the Fey": 3,
+        "Roiling Roots": 4,
+        "Cyclic Shifts": 2,
+        "Surge of Slaughter": 3,
+        "Linked Ley Lines": 2,
+        "Noxious Nexus": 3,
+        "The Liferoots": 2,
+        "Bountiful Equinox": 3,
+        "Lifecycle": 2,
+        "Creeping Corruption": 3,
+        "Grasp of Thorns": 2
+      }
+    },
+    {
+      "name": "Volturnos Tidecaller",
+      "army": "Idoneth Deepkin",
+      "listName": "Akhelian",
+      "battleplanScores": {
+        "Passing Seasons": 3,
+        "Paths of the Fey": 4,
+        "Roiling Roots": 3,
+        "Cyclic Shifts": 4,
+        "Surge of Slaughter": 3,
+        "Linked Ley Lines": 4,
+        "Noxious Nexus": 3,
+        "The Liferoots": 4,
+        "Bountiful Equinox": 3,
+        "Lifecycle": 4,
+        "Creeping Corruption": 6,
+        "Grasp of Thorns": 3
+      }
+    }
+  ]
+}

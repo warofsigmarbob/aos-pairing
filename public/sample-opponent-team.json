@@ -1,0 +1,95 @@
+{
+  "teamName": "The Chaos Reavers",
+  "players": [
+    { "name": "Rotgut Plaguebringer", "army": "Maggotkin of Nurgle", "listName": "Great Unclean One" },
+    { "name": "Sylessa the Enrapturing", "army": "Hedonites of Slaanesh", "listName": "Keeper of Secrets" },
+    { "name": "Kharros Skullreaper", "army": "Blades of Khorne", "listName": "Skarbrand" },
+    { "name": "Tzaangor Fatecaster", "army": "Disciples of Tzeentch", "listName": "Changehost" },
+    { "name": "Lady Olynder's Chosen", "army": "Nighthaunt", "listName": "Spirit Hosts" },
+    { "name": "Arkhan the Bonelord", "army": "Ossiarch Bonereapers", "listName": "Petrifex Elite" },
+    { "name": "Zarbag Loonking", "army": "Gloomspite Gitz", "listName": "Squig Herd" },
+    { "name": "Gordrakk Megaboss", "army": "Orruk Warclans", "listName": "Ironjawz" }
+  ],
+  "matchupMatrix": {
+    "Shootcast": {
+      "Great Unclean One": 4,
+      "Keeper of Secrets": 5,
+      "Skarbrand": 3,
+      "Changehost": 4,
+      "Spirit Hosts": 6,
+      "Petrifex Elite": 3,
+      "Squig Herd": 5,
+      "Ironjawz": 4
+    },
+    "Verminlord": {
+      "Great Unclean One": 3,
+      "Keeper of Secrets": 4,
+      "Skarbrand": 2,
+      "Changehost": 5,
+      "Spirit Hosts": 4,
+      "Petrifex Elite": 3,
+      "Squig Herd": 5,
+      "Ironjawz": 3
+    },
+    "Morathi": {
+      "Great Unclean One": 5,
+      "Keeper of Secrets": 4,
+      "Skarbrand": 4,
+      "Changehost": 5,
+      "Spirit Hosts": 5,
+      "Petrifex Elite": 4,
+      "Squig Herd": 6,
+      "Ironjawz": 5
+    },
+    "Sentinels": {
+      "Great Unclean One": 4,
+      "Keeper of Secrets": 3,
+      "Skarbrand": 2,
+      "Changehost": 3,
+      "Spirit Hosts": 5,
+      "Petrifex Elite": 2,
+      "Squig Herd": 4,
+      "Ironjawz": 2
+    },
+    "Vampire Lords": {
+      "Great Unclean One": 4,
+      "Keeper of Secrets": 4,
+      "Skarbrand": 3,
+      "Changehost": 4,
+      "Spirit Hosts": 3,
+      "Petrifex Elite": 5,
+      "Squig Herd": 4,
+      "Ironjawz": 4
+    },
+    "Kroak": {
+      "Great Unclean One": 5,
+      "Keeper of Secrets": 5,
+      "Skarbrand": 4,
+      "Changehost": 6,
+      "Spirit Hosts": 5,
+      "Petrifex Elite": 4,
+      "Squig Herd": 5,
+      "Ironjawz": 5
+    },
+    "Hearthguard": {
+      "Great Unclean One": 2,
+      "Keeper of Secrets": 3,
+      "Skarbrand": 2,
+      "Changehost": 2,
+      "Spirit Hosts": 3,
+      "Petrifex Elite": 4,
+      "Squig Herd": 3,
+      "Ironjawz": 2
+    },
+    "Akhelian": {
+      "Great Unclean One": 3,
+      "Keeper of Secrets": 4,
+      "Skarbrand": 3,
+      "Changehost": 3,
+      "Spirit Hosts": 4,
+      "Petrifex Elite": 3,
+      "Squig Herd": 4,
+      "Ironjawz": 3
+    }
+  }
+}
