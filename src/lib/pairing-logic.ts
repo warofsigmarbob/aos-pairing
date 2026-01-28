@@ -109,7 +109,7 @@ export function iChooseAttacker(
     pairings: [...state.pairings, pairing],
     myAvailablePlayers: newMyAvailable,
     opponentAvailablePlayers: newOpponentAvailable,
-    opponentAttackers: null,
+    // Keep opponentAttackers so we can identify unchosen attacker in opponentChoosesAttacker
     myDefender: null,
     phase: 'opponent-chooses', // Now go to opponent choosing
   };
@@ -147,21 +147,33 @@ export function opponentChoosesAttacker(
   if (currentRound === 3 && newMyAvailable.length === 2 && newOpponentAvailable.length === 2) {
     const map4 = selectedMaps[3];
 
-    // Auto-pair the remaining 2 players on each side
+    // Identify forgotten (not offered as attacker) vs unchosen (offered but not picked)
+    // My side: unchosen = the attacker opponent didn't pick; forgotten = the other remaining
+    const myUnchosenAttacker = myAttackers!.find((a) => a.id !== chosenAttacker.id)!;
+    const myForgotten = newMyAvailable.find((p) => p.id !== myUnchosenAttacker.id)!;
+
+    // Opponent side: unchosen = the attacker I didn't pick (still in available pool)
+    const oppUnchosenAttacker = state.opponentAttackers
+      ? state.opponentAttackers.find((a) => newOpponentAvailable.some((p) => p.id === a.id))!
+      : newOpponentAvailable[0];
+    const oppForgotten = newOpponentAvailable.find((p) => p.id !== oppUnchosenAttacker.id)!;
+
+    // Forgotten players become defenders on turn 4
+    // Unchosen attackers from round 3 are paired against opponent's forgotten (defender)
     const autoPairing1 = createPairing(
       map4.id,
       map4.name,
       4,
-      newMyAvailable[0],
-      newOpponentAvailable[0],
+      myForgotten,
+      oppUnchosenAttacker,
       true
     );
     const autoPairing2 = createPairing(
       map4.id,
       map4.name,
       4,
-      newMyAvailable[1],
-      newOpponentAvailable[1],
+      myUnchosenAttacker,
+      oppForgotten,
       true
     );
 
@@ -177,6 +189,7 @@ export function opponentChoosesAttacker(
     myAvailablePlayers: newMyAvailable,
     opponentAvailablePlayers: newOpponentAvailable,
     myAttackers: null,
+    opponentAttackers: null,
     opponentDefender: null,
     phase: nextPhase,
   };

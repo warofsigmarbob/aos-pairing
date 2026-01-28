@@ -311,7 +311,7 @@ export function TeamPanel({
                     {/* Matchup score for opponent players (manual toggle) */}
                     {!isMyTeam && matchupScore !== null && (
                       <span
-                        className={`text-xs font-bold px-1.5 py-0.5 rounded ${getScoreColor(matchupScore)} ${getScoreBgColor(matchupScore)} ring-2 ring-purple-400`}
+                        className="text-xs font-bold px-1.5 py-0.5 rounded bg-purple-600 text-white ring-2 ring-purple-400"
                         title={`Matchup vs ${showMatchupsFor}: ${matchupScore}`}
                       >
                         M:{matchupScore}
