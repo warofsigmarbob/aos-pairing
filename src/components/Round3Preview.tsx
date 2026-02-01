@@ -109,85 +109,131 @@ export function Round3Preview({ state }: Round3PreviewProps) {
 
     // After attackers set - show choice outcomes
     if ((phase === 'i-choose' || phase === 'opponent-chooses') && myAttackers && opponentAttackers) {
-      // Find who was NOT offered
-      const myNotOffered = myAvailablePlayers.find(
+      // Forgotten = not offered as attacker, not defender (auto-defender on turn 4)
+      const myForgotten = myAvailablePlayers.find(
         (p) => p.id !== myDefender?.id && !myAttackers.some((a) => a.id === p.id)
       );
-      const oppNotOffered = opponentAvailablePlayers.find(
+      const oppForgotten = opponentAvailablePlayers.find(
         (p) => p.id !== opponentDefender?.id && !opponentAttackers.some((a) => a.id === p.id)
       );
 
-      return (
-        <div className="space-y-3">
-          <p className="font-medium text-amber-600 dark:text-amber-400 text-sm">
-            Round 3 Outcome Preview
-          </p>
-
-          {/* Show what happens with each choice */}
-          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
-            <p className="text-xs font-medium text-amber-700 dark:text-amber-300 mb-2">
-              {map3.name} (this round):
+      if (phase === 'i-choose') {
+        return (
+          <div className="space-y-3">
+            <p className="font-medium text-amber-600 dark:text-amber-400 text-sm">
+              Round 3 Outcome Preview
             </p>
-            <div className="space-y-1 text-xs">
-              <div className="flex items-center gap-2">
-                <span className="text-blue-600 font-medium">{myDefender?.army}</span>
-                <span className="text-zinc-400">vs</span>
-                <span className="text-red-600">Your choice from: {opponentAttackers.map(a => a.army).join(' or ')}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-blue-600">Opponent picks from: {myAttackers.map(a => a.army).join(' or ')}</span>
-                <span className="text-zinc-400">vs</span>
-                <span className="text-red-600 font-medium">{opponentDefender?.army}</span>
-              </div>
-            </div>
-          </div>
 
-          <div className="bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800 rounded-lg p-3">
-            <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-2">
-              {map4.name} (auto-paired):
-            </p>
-            <div className="space-y-1 text-xs">
-              <p className="text-zinc-600 dark:text-zinc-400">
-                Unchosen attackers + not-offered players will auto-pair:
+            {/* Forgotten players */}
+            <div className="bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 rounded-lg p-3">
+              <p className="text-xs font-medium text-orange-700 dark:text-orange-300 mb-2">
+                Forgotten (auto-defenders on {map4.name}):
               </p>
-              <div className="mt-2 flex items-center justify-between">
-                <div className="text-blue-600">
-                  <p className="font-medium">Your side:</p>
-                  <p>• Unchosen from [{myAttackers.map(a => a.army).join(', ')}]</p>
-                  {myNotOffered && <p>• {myNotOffered.army} (not offered)</p>}
-                </div>
-                <div className="text-xl text-zinc-400">↔</div>
-                <div className="text-red-600 text-right">
-                  <p className="font-medium">Opponent:</p>
-                  <p>• Unchosen from [{opponentAttackers.map(a => a.army).join(', ')}]</p>
-                  {oppNotOffered && <p>• {oppNotOffered.army} (not offered)</p>}
-                </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-blue-600 font-medium">{myForgotten?.army}</span>
+                <span className="text-red-600 font-medium">{oppForgotten?.army}</span>
               </div>
             </div>
-          </div>
 
-          {/* Show specific scenarios */}
-          {phase === 'i-choose' && (
+            {/* If you choose scenarios */}
             <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-xs">
               <p className="font-medium mb-2">If you choose...</p>
               {opponentAttackers.map((attacker) => {
-                const unchosen = opponentAttackers.find((a) => a.id !== attacker.id);
+                const oppUnchosen = opponentAttackers.find((a) => a.id !== attacker.id);
                 return (
-                  <div key={attacker.id} className="mb-2 p-2 bg-white dark:bg-zinc-900 rounded">
-                    <p className="font-medium text-green-600">→ {attacker.army}:</p>
-                    <p className="text-zinc-500 ml-2">
-                      {map3.name}: {myDefender?.army} vs {attacker.army}
+                  <div key={attacker.id} className="mb-3 p-2 bg-white dark:bg-zinc-900 rounded">
+                    <p className="font-medium text-green-600 mb-1">→ {attacker.army}:</p>
+                    <p className="text-zinc-600 dark:text-zinc-400 ml-2">
+                      R3 {map3.name}: <span className="text-blue-600 font-medium">{myDefender?.army}</span> vs <span className="text-red-600">{attacker.army}</span>
                     </p>
-                    <p className="text-purple-600 ml-2">
-                      {map4.name} will have: {unchosen?.army} (unchosen) + {oppNotOffered?.army} (not offered)
+                    <p className="text-purple-600 dark:text-purple-400 ml-2">
+                      R4 {map4.name}: <span className="text-blue-600 font-medium">{myForgotten?.army}</span> (defender) vs <span className="text-red-600">{oppUnchosen?.army}</span>
+                    </p>
+                    <p className="text-purple-600 dark:text-purple-400 ml-2">
+                      R4 {map4.name}: Opp picks from [{myAttackers.map(a => a.army).join(', ')}] → unchosen vs <span className="text-red-600">{oppForgotten?.army}</span> (defender)
                     </p>
                   </div>
                 );
               })}
             </div>
-          )}
-        </div>
-      );
+          </div>
+        );
+      }
+
+      if (phase === 'opponent-chooses') {
+        // I already chose — first R3 pairing exists
+        const round3Pairings = state.pairings.filter(p => p.round === 3);
+        const firstPairing = round3Pairings[0];
+
+        // Opponent's unchosen attacker (the one I didn't pick, still in available pool)
+        const oppUnchosenAttacker = opponentAttackers.find(a =>
+          opponentAvailablePlayers.some(p => p.id === a.id)
+        );
+
+        return (
+          <div className="space-y-3">
+            <p className="font-medium text-amber-600 dark:text-amber-400 text-sm">
+              Round 3 Outcome Preview
+            </p>
+
+            {/* R3 status */}
+            <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
+              <p className="text-xs font-medium text-amber-700 dark:text-amber-300 mb-2">
+                {map3.name} (this round):
+              </p>
+              <div className="space-y-1 text-xs">
+                {firstPairing && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-600 font-medium">{firstPairing.myPlayer.army}</span>
+                    <span className="text-zinc-400">vs</span>
+                    <span className="text-red-600 font-medium">{firstPairing.opponentPlayer.army}</span>
+                    <span className="text-green-600">✓</span>
+                  </div>
+                )}
+                <div className="flex items-center gap-2">
+                  <span className="text-blue-600">Opponent picks from: {myAttackers.map(a => a.army).join(' or ')}</span>
+                  <span className="text-zinc-400">vs</span>
+                  <span className="text-red-600 font-medium">{opponentDefender?.army}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* R4 fixed pairing */}
+            <div className="bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800 rounded-lg p-3">
+              <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-2">
+                {map4.name} (auto-paired):
+              </p>
+              <div className="space-y-1 text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="text-blue-600 font-medium">{myForgotten?.army}</span>
+                  <span className="text-zinc-500">(defender)</span>
+                  <span className="text-zinc-400">vs</span>
+                  <span className="text-red-600 font-medium">{oppUnchosenAttacker?.army}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* If opponent chooses scenarios */}
+            <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-xs">
+              <p className="font-medium mb-2">If opponent chooses...</p>
+              {myAttackers.map((attacker) => {
+                const myUnchosen = myAttackers.find((a) => a.id !== attacker.id);
+                return (
+                  <div key={attacker.id} className="mb-3 p-2 bg-white dark:bg-zinc-900 rounded">
+                    <p className="font-medium text-green-600 mb-1">→ {attacker.army}:</p>
+                    <p className="text-zinc-600 dark:text-zinc-400 ml-2">
+                      R3 {map3.name}: <span className="text-blue-600">{attacker.army}</span> vs <span className="text-red-600 font-medium">{opponentDefender?.army}</span>
+                    </p>
+                    <p className="text-purple-600 dark:text-purple-400 ml-2">
+                      R4 {map4.name}: <span className="text-blue-600 font-medium">{myUnchosen?.army}</span> vs <span className="text-red-600">{oppForgotten?.army}</span> (defender)
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
     }
 
     return null;

@@ -226,6 +226,32 @@ export function TeamPanel({
             (phase === 'i-choose' && !isMyTeam && opponentAttackers?.some((a) => a.id === player.id)) ||
             (phase === 'opponent-chooses' && isMyTeam && myAttackers?.some((a) => a.id === player.id));
 
+          // Forgotten player detection (Round 3 only)
+          // The forgotten is the available player who is neither defender nor attacker — auto-defender on turn 4
+          const isForgotten = (() => {
+            if (state.currentRound !== 3 || paired || !available) return false;
+            if (isMyTeam) {
+              // Before locking: 2 attackers selected in UI but not confirmed
+              if (phase === 'offer-my-attackers' && selectedIds.length === 2) {
+                return player.id !== myDefender?.id && !selectedIds.includes(player.id);
+              }
+              // After locking: myAttackers confirmed
+              if (myAttackers) {
+                return player.id !== myDefender?.id && !myAttackers.some((a) => a.id === player.id);
+              }
+            } else {
+              // Before locking: 2 opponent attackers selected in UI but not confirmed
+              if (phase === 'offer-opponent-attackers' && selectedIds.length === 2) {
+                return player.id !== opponentDefender?.id && !selectedIds.includes(player.id);
+              }
+              // After locking: opponentAttackers confirmed
+              if (opponentAttackers) {
+                return player.id !== opponentDefender?.id && !opponentAttackers.some((a) => a.id === player.id);
+              }
+            }
+            return false;
+          })();
+
           return (
             <div
               key={player.id}
@@ -245,10 +271,15 @@ export function TeamPanel({
                   : selected
                     ? `${isMyTeam ? 'bg-blue-100 dark:bg-blue-950 border-2 border-blue-500 ring-2 ring-blue-300' : 'bg-red-100 dark:bg-red-950 border-2 border-red-500 ring-2 ring-red-300'}`
                     : isChoosableAttacker
-                      ? 'bg-yellow-50 dark:bg-yellow-950 border-2 border-yellow-400 cursor-pointer hover:bg-yellow-100 dark:hover:bg-yellow-900'
-                      : playerStatus
-                        ? `${playerStatus.color === 'blue' ? 'bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800' : 'bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800'}`
-                        : canSelect
+                      ? `${isMyTeam ? 'bg-blue-200 dark:bg-blue-900 border-2 border-blue-500 cursor-pointer hover:bg-blue-300 dark:hover:bg-blue-800' : 'bg-red-200 dark:bg-red-900 border-2 border-red-500 cursor-pointer hover:bg-red-300 dark:hover:bg-red-800'}`
+                      : isForgotten
+                        ? `${isMyTeam ? 'bg-indigo-50 dark:bg-indigo-950 border-2 border-indigo-400 dark:border-indigo-600' : 'bg-pink-50 dark:bg-pink-950 border-2 border-pink-400 dark:border-pink-600'}`
+                        : playerStatus
+                          ? `${playerStatus.status === 'Defender'
+                              ? (isMyTeam ? 'bg-blue-100 dark:bg-blue-950 border border-blue-300 dark:border-blue-700' : 'bg-red-100 dark:bg-red-950 border border-red-300 dark:border-red-700')
+                              : (isMyTeam ? 'bg-sky-50 dark:bg-sky-950 border border-sky-300 dark:border-sky-700' : 'bg-rose-50 dark:bg-rose-950 border border-rose-300 dark:border-rose-700')
+                            }`
+                          : canSelect
                           ? `bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 cursor-pointer ${isMyTeam ? 'hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950' : 'hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-950'}`
                           : available
                             ? 'bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700'
@@ -390,7 +421,7 @@ export function TeamPanel({
                     </span>
                   )}
                   {playerStatus && !selected && (
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded ${playerStatus.color === 'blue' ? 'text-blue-600 bg-blue-100 dark:bg-blue-900' : 'text-red-600 bg-red-100 dark:bg-red-900'}`}>
+                    <span className="text-xs font-medium px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-200 bg-white/80 dark:bg-zinc-700/80">
                       {playerStatus.status}
                     </span>
                   )}
@@ -398,8 +429,13 @@ export function TeamPanel({
                     <span className="text-xs font-medium text-green-600">Paired</span>
                   )}
                   {isChoosableAttacker && !selected && (
-                    <span className="text-xs font-bold text-yellow-600 bg-yellow-200 dark:bg-yellow-800 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-200 bg-white/80 dark:bg-zinc-700/80">
                       Choose?
+                    </span>
+                  )}
+                  {isForgotten && (
+                    <span className="text-xs font-bold px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-200 bg-white/80 dark:bg-zinc-700/80">
+                      Forgotten
                     </span>
                   )}
                 </div>

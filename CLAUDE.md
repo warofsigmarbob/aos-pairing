@@ -20,8 +20,10 @@ A Next.js application to manage team pairings for Warhammer Age of Sigmar team t
 4. The chosen attacker is **paired** with the defender for that map
 5. The unchosen attacker **returns to the pool**
 6. Repeat for turn 1 and 2
-7. turn 3 is the same as turn 1 and 2 but the attacking list that is not chosen in turn 3 be automatically paired with the last list in the roster of the opponent..
-So there is no turn4 per se because the choice in the previous turns automatically pair the last list in the roster of the opponent.
+7. turn 3 is the same as turn 1 and 2 but once attacker are offered (before selection), each team will have one team in their respective pool. called the "forgotten"
+8. Each forgotten is instantly selected to be defender on turn 4.
+9. the attacker not chosen by the opposing team in the round 3 is paired into the opponent defender on turn 4 automaticaly
+
 
 ## Tech Stack
 
